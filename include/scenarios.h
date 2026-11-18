@@ -1,14 +1,11 @@
-// scenarios.h - The three mandatory demonstration scenarios.
-//   1. Normal operation        2. Capacity / constraint shock        3. Large-data stress
-// Each scenario compares at least two valid strategies on the same input.
+/* scenarios.h - The three mandatory demonstration scenarios.
+ *   1. Normal operation   2. Capacity / constraint shock   3. Large-data stress
+ * Each compares at least two valid strategies on the same input (fixed seeds). */
 #ifndef SCENARIOS_H
 #define SCENARIOS_H
 
-#include <iosfwd>
-#include <string>
-
-void runScenarioNormal(std::ostream& out);
-void runScenarioShock(std::ostream& out);
-void runScenarioStress(std::ostream& out, const std::string& csvPath);
+void run_scenario_normal(void);
+void run_scenario_shock(void);
+void run_scenario_stress(const char *csv_path);   /* csv_path may be NULL */
 
 #endif

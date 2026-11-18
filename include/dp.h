@@ -1,32 +1,36 @@
-// dp.h - Dynamic programming: 0/1 knapsack (reading plan) and LCS (document similarity).
+/* dp.h - Dynamic programming: 0/1 knapsack (reading plan) and LCS (document similarity). */
 #ifndef DP_H
 #define DP_H
 
-#include <string>
-#include <vector>
-
 #include "model.h"
 
-// Exact 0/1 knapsack. Theta(n*W) time (pseudo-polynomial), Theta(W + n*W/8..n*W) memory.
-// dp[w] = best value using the items seen so far within w minutes.
-KnapsackResult knapsackDP(const std::vector<Item>& items, int capacity);
+/* Exact 0/1 knapsack. Theta(n*W) time (pseudo-polynomial), Theta(W) values + n*W decision bytes.
+ * best[w] = best value using the items seen so far within w minutes. */
+KnapsackResult knapsack_dp(const Item *items, int n, int capacity);
 
-// Lower-case word tokens (letters/digits only).
-std::vector<std::string> tokenize(const std::string& s);
+/* A text split into lower-case words (letters/digits only). */
+typedef struct {
+    char **words;
+    int count;
+} Tokens;
 
-struct LcsResult {
-    int length = 0;
-    std::vector<std::string> sequence;   // one longest common subsequence
-    long long cells = 0;                 // table cells filled
-};
+void tokenize(const char *s, Tokens *out);
+void tokens_free(Tokens *t);
 
-// Full table with reconstruction. Theta(n*m) time and space.
-LcsResult lcsTokens(const std::vector<std::string>& a, const std::vector<std::string>& b);
+typedef struct {
+    int length;
+    const char **sequence;   /* one longest common subsequence (points into a's words) */
+    long long cells;         /* table cells filled */
+} LcsResult;
 
-// Length only, two rolling rows. Theta(n*m) time, Theta(min(n,m)) space.
-int lcsLength(const std::vector<std::string>& a, const std::vector<std::string>& b, long long* cells = nullptr);
+/* Full table with reconstruction. Theta(n*m) time and space. Free with lcs_result_free. */
+LcsResult lcs_tokens(const Tokens *a, const Tokens *b);
+void lcs_result_free(LcsResult *r);
 
-// 2*LCS / (|a| + |b|), in [0, 1].
-double lcsSimilarity(const std::vector<std::string>& a, const std::vector<std::string>& b, long long* cells = nullptr);
+/* Length only with two rolling rows. Theta(n*m) time, Theta(min(n,m)) space. */
+int lcs_length(const Tokens *a, const Tokens *b, long long *cells);
+
+/* 2*LCS / (|a| + |b|), in [0, 1]. */
+double lcs_similarity(const Tokens *a, const Tokens *b, long long *cells);
 
 #endif

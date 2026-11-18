@@ -1,74 +1,74 @@
 experiment,dataset,algorithm,n,time_ms,operations,aux_bytes,note
-Sort by rating,small random,Merge sort,1000,0.7804,8705,104000,depth=11
-Sort by rating,small random,Quick sort (random pivot),1000,0.4664,9939,768,depth=12
-Sort by rating,small random,Quick sort (median of 3),1000,0.3802,8184,576,depth=9
-Sort by rating,small random,Quick sort (last pivot),1000,0.4290,9148,768,depth=12
-2000 id lookups,small,Linear search,1000,1.1519,1497605,0,found=1000
-2000 id lookups,small,Binary search (iterative),1000,0.0690,18949,0,found=1000
-2000 id lookups,small,Binary search (recursive),1000,0.0729,18949,640,found=1000
-Phrase 'dynamic programming',small abstracts,Naive,316139,0.7389,353667,0,matches=1478 pre=0
-Phrase 'dynamic programming',small abstracts,Rabin-Karp,316139,4.2803,344203,0,matches=1478 pre=19
-Phrase 'dynamic programming',small abstracts,Finite automaton,316139,0.7496,316139,20480,matches=1478 pre=5120
-Phrase 'dynamic programming',small abstracts,KMP,316139,0.9236,322640,76,matches=1478 pre=18
-Citation distances,small graph,Dijkstra (binary heap),1000,0.1843,4072,36432,settled=1000 E=2036
-Compress abstracts,small,Huffman coding,316139,14.6203,316139,1664,size=53.1% roundtrip=ok
-Similar to book #0,small,LCS (2-row DP) + Jaccard,1000,14.4658,1299441,408,top=#705
-Sort by rating,medium random,Merge sort,10000,10.6718,119854,1040000,depth=15
-Sort by rating,medium random,Quick sort (random pivot),10000,4.4783,87773,640,depth=10
-Sort by rating,medium random,Quick sort (median of 3),10000,3.6671,92809,512,depth=8
-Sort by rating,medium random,Quick sort (last pivot),10000,5.9618,110054,768,depth=12
-2000 id lookups,medium,Linear search,10000,11.9707,14971495,0,found=1000
-2000 id lookups,medium,Binary search (iterative),10000,0.1030,26355,0,found=1000
-2000 id lookups,medium,Binary search (recursive),10000,0.0911,26355,640,found=1000
-Phrase 'dynamic programming',medium abstracts,Naive,3201089,6.3824,3579435,0,matches=15039 pre=0
-Phrase 'dynamic programming',medium abstracts,Rabin-Karp,3201089,33.2894,3486812,0,matches=15039 pre=19
-Phrase 'dynamic programming',medium abstracts,Finite automaton,3201089,6.8165,3201089,20480,matches=15039 pre=5120
-Phrase 'dynamic programming',medium abstracts,KMP,3201089,9.9119,3266917,76,matches=15039 pre=18
-Citation distances,medium graph,Dijkstra (binary heap),10000,1.7321,39986,359916,settled=10000 E=19993
-Compress abstracts,medium,Huffman coding,3201089,131.6351,3201089,1664,size=53.1% roundtrip=ok
-Similar to book #0,medium,LCS (2-row DP) + Jaccard,10000,148.3691,13196271,408,top=#5275
-Reading plan (0/1 knapsack),20 candidates,Dynamic programming (0/1 table),20,0.0176,5523,9660,value=331.0 (100%) W=344
-Reading plan (0/1 knapsack),20 candidates,Greedy (best value per minute),20,0.0034,83,640,value=315.0 (95.17%)
-Reading plan (0/1 knapsack),20 candidates,Backtracking + bound (B&B),20,0.0057,173,1000,value=331.0 (100.00%)
-Reading plan (0/1 knapsack),40 candidates,Dynamic programming (0/1 table),40,0.0461,23152,30864,value=813.0 (100%) W=642
-Reading plan (0/1 knapsack),40 candidates,Greedy (best value per minute),40,0.0047,205,1280,value=813.0 (100.00%)
-Reading plan (0/1 knapsack),40 candidates,Backtracking + bound (B&B),40,0.0067,225,2000,value=813.0 (100.00%)
-Reading plan (0/1 knapsack),100 candidates,Dynamic programming (0/1 table),100,0.2528,161665,181872,value=2004.0 (100%) W=1683
-Reading plan (0/1 knapsack),100 candidates,Greedy (best value per minute),100,0.0101,634,3200,value=2004.0 (100.00%)
-Reading plan (0/1 knapsack),100 candidates,Backtracking + bound (B&B),100,0.0133,627,5000,value=2004.0 (100.00%)
-Reading plan (0/1 knapsack),1000 candidates,Dynamic programming (0/1 table),1000,23.3648,16478822,16677360,value=17641.0 (100%) W=16544
-Reading plan (0/1 knapsack),1000 candidates,Greedy (best value per minute),1000,0.1224,9708,32000,value=17634.0 (99.96%)
-Reading plan (0/1 knapsack),1000 candidates,Backtracking + bound (B&B),1000,0.3541,26093,50000,value=17641.0 (100.00%)
-Sort by rating,large random,Merge sort,100000,135.7211,1525125,10400000,depth=18
-Sort by rating,large random,Quick sort (random pivot),100000,41.1456,962401,768,depth=12
-Sort by rating,large random,Quick sort (median of 3),100000,39.0960,756458,512,depth=8
-Sort by rating,large random,Quick sort (last pivot),100000,43.5893,914468,640,depth=10
-2000 id lookups,large,Linear search,100000,329.8596,149711010,0,found=1000
-2000 id lookups,large,Binary search (iterative),100000,0.1963,32733,0,found=1000
-2000 id lookups,large,Binary search (recursive),100000,0.1793,32733,640,found=1000
-Phrase 'dynamic programming',large abstracts,Naive,32143982,70.1256,35932817,0,matches=151325 pre=0
-Phrase 'dynamic programming',large abstracts,Rabin-Karp,32143982,334.6758,35019139,0,matches=151325 pre=19
-Phrase 'dynamic programming',large abstracts,Finite automaton,32143982,66.1771,32143982,20480,matches=151325 pre=5120
-Phrase 'dynamic programming',large abstracts,KMP,32143982,88.7054,32799611,76,matches=151325 pre=18
-Citation distances,large graph,Dijkstra (binary heap),100000,25.3125,399870,3599220,settled=100000 E=199935
-Sort sorted ids,adversarial (sorted),Merge sort,1000,0.0319,4932,4000,depth=11
-Sort sorted ids,adversarial (sorted),Quick sort (random pivot),1000,0.0782,18621,1280,depth=20
-Sort sorted ids,adversarial (sorted),Quick sort (last pivot),1000,0.9713,501498,64,depth=999 (Theta(n^2))
-Sort sorted ids,adversarial (sorted),Merge sort,5000,0.1051,29804,20000,depth=14
-Sort sorted ids,adversarial (sorted),Quick sort (random pivot),5000,0.2580,112325,1792,depth=28
-Sort sorted ids,adversarial (sorted),Quick sort (last pivot),5000,15.4363,12507498,64,depth=4999 (Theta(n^2))
-Sort sorted ids,adversarial (sorted),Merge sort,20000,0.4402,139216,80000,depth=16
-Sort sorted ids,adversarial (sorted),Quick sort (random pivot),20000,1.1188,523648,2112,depth=33
-Sort sorted ids,adversarial (sorted),Quick sort (last pivot),20000,307.3839,200029998,64,depth=19999 (Theta(n^2))
-Pattern a^49 b,adversarial a^n,Naive,200000,18.5901,9997550,0,matches=0
-Pattern a^49 b,adversarial a^n,Rabin-Karp,200000,1.8228,199951,0,matches=0
-Pattern a^49 b,adversarial a^n,Finite automaton,200000,0.3584,200000,0,matches=0
-Pattern a^49 b,adversarial a^n,KMP,200000,0.7770,399951,0,matches=0
-Rabin-Karp modulus,random abcd text,Rabin-Karp mod=101,200000,1.8484,202718,0,matches=0 spurious=2060
-Rabin-Karp modulus,random abcd text,Rabin-Karp mod=1000000007,200000,2.0791,199991,0,matches=0 spurious=0
-Readers -> copies,1000 x 1000,Bipartite matching (augmenting paths),1000,1.6667,193948,9000,matched=939
-Readers -> copies,10000 x 10000,Bipartite matching (augmenting paths),10000,333.4539,16623566,90000,matched=9411
-Best borrowing period,daily changes,Max subarray (divide & conquer),100000,6.0969,1668928,1280,sum=18337
-Best borrowing period,daily changes,Max subarray (Kadane),100000,0.0916,99999,0,sum=18337
-Best borrowing period,daily changes,Max subarray (divide & conquer),1000000,55.1410,19951424,1280,sum=41598
-Best borrowing period,daily changes,Max subarray (Kadane),1000000,1.0857,999999,0,sum=41598
+Sort by rating,small random,Merge sort,1000,0.3432,8690,368000,depth=11
+Sort by rating,small random,Quick sort (random pivot),1000,0.2209,5933,704,depth=11
+Sort by rating,small random,Quick sort (median of 3),1000,0.1958,5315,512,depth=8
+Sort by rating,small random,Quick sort (last pivot),1000,0.2071,5485,576,depth=9
+2000 id lookups,small,Linear search,1000,2.6690,1497169,0,found=1000
+2000 id lookups,small,Binary search (iterative),1000,0.0856,18926,0,found=1000
+2000 id lookups,small,Binary search (recursive),1000,0.0891,18926,640,found=1000
+Phrase 'dynamic programming',small abstracts,Naive,318587,0.5943,356203,0,matches=1487 pre=0
+Phrase 'dynamic programming',small abstracts,Rabin-Karp,318587,6.7748,346822,0,matches=1487 pre=19
+Phrase 'dynamic programming',small abstracts,Finite automaton,318587,1.3254,318587,20480,matches=1487 pre=5120
+Phrase 'dynamic programming',small abstracts,KMP,318587,0.8680,325174,76,matches=1487 pre=18
+Citation distances,small graph,Dijkstra (binary heap),1000,0.3071,3926,43408,settled=1000 E=1963
+Compress abstracts,small,Huffman coding,318587,8.7681,318587,1664,size=53.1% roundtrip=ok
+Similar to book #0,small,LCS (2-row DP) + Jaccard,1000,22.5739,1508524,408,top=#72
+Sort by rating,medium random,Merge sort,10000,4.2874,119710,3680000,depth=15
+Sort by rating,medium random,Quick sort (random pivot),10000,3.6816,72368,768,depth=12
+Sort by rating,medium random,Quick sort (median of 3),10000,2.8368,52208,576,depth=9
+Sort by rating,medium random,Quick sort (last pivot),10000,3.3980,60524,704,depth=11
+2000 id lookups,medium,Linear search,10000,34.5453,14976169,0,found=1000
+2000 id lookups,medium,Binary search (iterative),10000,0.1048,26331,0,found=1000
+2000 id lookups,medium,Binary search (recursive),10000,0.1082,26331,640,found=1000
+Phrase 'dynamic programming',medium abstracts,Naive,3212880,5.7233,3589703,0,matches=15017 pre=0
+Phrase 'dynamic programming',medium abstracts,Rabin-Karp,3212880,30.8637,3498185,0,matches=15017 pre=19
+Phrase 'dynamic programming',medium abstracts,Finite automaton,3212880,5.7332,3212880,20480,matches=15017 pre=5120
+Phrase 'dynamic programming',medium abstracts,KMP,3212880,3.9770,3278756,76,matches=15017 pre=18
+Citation distances,medium graph,Dijkstra (binary heap),10000,2.0489,40072,440576,settled=10000 E=20036
+Compress abstracts,medium,Huffman coding,3212880,90.4524,3212880,1664,size=53.0% roundtrip=ok
+Similar to book #0,medium,LCS (2-row DP) + Jaccard,10000,175.4527,15228082,408,top=#2631
+Reading plan (0/1 knapsack),20 candidates,Dynamic programming (0/1 table),20,0.0111,4610,8064,value=381.0 (100%) W=287
+Reading plan (0/1 knapsack),20 candidates,Greedy (best value per minute),20,0.0028,85,640,value=381.0 (100.00%)
+Reading plan (0/1 knapsack),20 candidates,Backtracking + bound (B&B),20,0.0035,95,1000,value=381.0 (100.00%)
+Reading plan (0/1 knapsack),40 candidates,Dynamic programming (0/1 table),40,0.0426,22035,29376,value=784.0 (100%) W=611
+Reading plan (0/1 knapsack),40 candidates,Greedy (best value per minute),40,0.0051,203,1280,value=778.0 (99.23%)
+Reading plan (0/1 knapsack),40 candidates,Backtracking + bound (B&B),40,0.0087,358,2000,value=784.0 (100.00%)
+Reading plan (0/1 knapsack),100 candidates,Dynamic programming (0/1 table),100,0.3241,152164,171180,value=1864.0 (100%) W=1584
+Reading plan (0/1 knapsack),100 candidates,Greedy (best value per minute),100,0.0134,635,3200,value=1864.0 (100.00%)
+Reading plan (0/1 knapsack),100 candidates,Backtracking + bound (B&B),100,0.0185,680,5000,value=1864.0 (100.00%)
+Reading plan (0/1 knapsack),1000 candidates,Dynamic programming (0/1 table),1000,37.9277,16366273,16563456,value=17793.0 (100%) W=16431
+Reading plan (0/1 knapsack),1000 candidates,Greedy (best value per minute),1000,0.3909,9698,32000,value=17788.0 (99.97%)
+Reading plan (0/1 knapsack),1000 candidates,Backtracking + bound (B&B),1000,1.5019,24553,50000,value=17793.0 (100.00%)
+Sort by rating,large random,Merge sort,100000,84.6578,1525120,36800000,depth=18
+Sort by rating,large random,Quick sort (random pivot),100000,26.3386,616152,640,depth=10
+Sort by rating,large random,Quick sort (median of 3),100000,19.5741,499619,576,depth=9
+Sort by rating,large random,Quick sort (last pivot),100000,27.7298,622536,768,depth=12
+2000 id lookups,large,Linear search,100000,657.7712,148706169,0,found=1000
+2000 id lookups,large,Binary search (iterative),100000,0.1935,32708,0,found=1000
+2000 id lookups,large,Binary search (recursive),100000,0.1810,32708,640,found=1000
+Phrase 'dynamic programming',large abstracts,Naive,32141945,115.3125,35893866,0,matches=149448 pre=0
+Phrase 'dynamic programming',large abstracts,Rabin-Karp,32141945,536.5064,34981439,0,matches=149448 pre=19
+Phrase 'dynamic programming',large abstracts,Finite automaton,32141945,88.5962,32141945,20480,matches=149448 pre=5120
+Phrase 'dynamic programming',large abstracts,KMP,32141945,61.0205,32798849,76,matches=149448 pre=18
+Citation distances,large graph,Dijkstra (binary heap),100000,39.2985,400746,4405968,settled=100000 E=200373
+Sort sorted ids,adversarial (sorted),Merge sort,1000,0.0482,4932,4000,depth=11
+Sort sorted ids,adversarial (sorted),Quick sort (random pivot),1000,0.1487,11553,1344,depth=21
+Sort sorted ids,adversarial (sorted),Quick sort (last pivot),1000,1.3979,500499,63936,depth=999 (Theta(n^2))
+Sort sorted ids,adversarial (sorted),Merge sort,5000,0.2892,29804,20000,depth=14
+Sort sorted ids,adversarial (sorted),Quick sort (random pivot),5000,0.8075,70225,1600,depth=25
+Sort sorted ids,adversarial (sorted),Quick sort (last pivot),5000,39.3332,12502499,319936,depth=4999 (Theta(n^2))
+Sort sorted ids,adversarial (sorted),Merge sort,20000,2.9267,139216,80000,depth=16
+Sort sorted ids,adversarial (sorted),Quick sort (random pivot),20000,5.9239,367293,2496,depth=39
+Sort sorted ids,adversarial (sorted),Quick sort (last pivot),20000,609.9289,200009999,1279936,depth=19999 (Theta(n^2))
+Pattern a^49 b,adversarial a^n,Naive,200000,14.1720,9997550,0,matches=0
+Pattern a^49 b,adversarial a^n,Rabin-Karp,200000,2.5474,199951,0,matches=0
+Pattern a^49 b,adversarial a^n,Finite automaton,200000,0.4398,200000,0,matches=0
+Pattern a^49 b,adversarial a^n,KMP,200000,0.7321,399951,0,matches=0
+Rabin-Karp modulus,random abcd text,Rabin-Karp mod=101,200000,2.0120,202730,0,matches=0 spurious=2012
+Rabin-Karp modulus,random abcd text,Rabin-Karp mod=1000000007,200000,1.8342,199991,0,matches=0 spurious=0
+Readers -> copies,1000 x 1000,Bipartite matching (augmenting paths),1000,1.7016,177747,9000,matched=950
+Readers -> copies,10000 x 10000,Bipartite matching (augmenting paths),10000,209.4342,16823428,90000,matched=9392
+Best borrowing period,daily changes,Max subarray (divide & conquer),100000,7.3935,1668928,1280,sum=17330
+Best borrowing period,daily changes,Max subarray (Kadane),100000,0.1113,99999,0,sum=17330
+Best borrowing period,daily changes,Max subarray (divide & conquer),1000000,56.1610,19951424,1280,sum=20371
+Best borrowing period,daily changes,Max subarray (Kadane),1000000,0.8573,999999,0,sum=20371

@@ -1,35 +1,37 @@
-// graph.h - Graph algorithms on the citation network and on reader/copy assignment.
+/* graph.h - Graph algorithms on the citation network and on reader/copy assignment. */
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include <vector>
-
 #include "model.h"
 
-const long long INF_DIST = (long long)4e18;
+#define INF_DIST 4000000000000000000LL
 
-struct PathResult {
-    std::vector<long long> dist;   // INF_DIST if unreachable
-    std::vector<int> parent;       // -1 for sources / unreachable
-    long long relaxations = 0;     // edges examined
-    int settled = 0;               // vertices finalised
-};
+typedef struct {
+    int n;
+    long long *dist;         /* INF_DIST if unreachable */
+    int *parent;             /* -1 for sources / unreachable */
+    long long relaxations;   /* edges examined */
+    int settled;             /* vertices finalised */
+} PathResult;
 
-// Multi-source Dijkstra with a binary heap. Theta((V + E) log V). Requires weights >= 0
-// (negative edges are skipped as invalid input).
-PathResult dijkstra(const std::vector<std::vector<Edge>>& g, const std::vector<int>& sources);
+/* Multi-source Dijkstra with a binary min-heap. Theta((V + E) log V).
+ * Requires weights >= 0 (negative edges are skipped as invalid input). */
+PathResult dijkstra(const EdgeList *g, int n, const int *sources, int num_sources);
+void path_result_free(PathResult *pr);
 
-// Vertices from a source to target (empty if unreachable).
-std::vector<int> extractPath(const PathResult& pr, int target);
+/* Vertices from a source to target (cleared and left empty if unreachable). */
+void extract_path(const PathResult *pr, int target, IntVec *out);
 
-struct MatchingResult {
-    int size = 0;
-    std::vector<int> matchOfLeft;   // right vertex matched to each left vertex, or -1
-    long long steps = 0;            // edges examined while searching augmenting paths
-};
+typedef struct {
+    int size;
+    int n_left;
+    int *match_of_left;   /* right vertex matched to each left vertex, or -1 */
+    long long steps;      /* edges examined while searching augmenting paths */
+} MatchingResult;
 
-// Maximum bipartite matching by augmenting paths (Ford-Fulkerson on a unit-capacity network,
-// a.k.a. Kuhn's algorithm). Theta(V * E).
-MatchingResult maxBipartiteMatching(int nLeft, int nRight, const std::vector<std::vector<int>>& adj);
+/* Maximum bipartite matching by augmenting paths (Ford-Fulkerson on a unit-capacity
+ * network, a.k.a. Kuhn's algorithm). adj[u] lists the right vertices left vertex u accepts. O(V * E). */
+MatchingResult max_bipartite_matching(int n_left, int n_right, const IntVec *adj);
+void matching_result_free(MatchingResult *m);
 
 #endif

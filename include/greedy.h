@@ -1,43 +1,40 @@
-// greedy.h - Greedy algorithms:
-//   greedy 0/1 reading plan (heuristic), fractional knapsack (exact for fractions, upper bound for 0/1),
-//   activity selection (one reading room), interval partitioning (minimum rooms), Huffman coding.
+/* greedy.h - Greedy algorithms:
+ *   greedy 0/1 reading plan (heuristic), fractional knapsack (exact for fractions,
+ *   upper bound for 0/1), activity selection (one room), interval partitioning
+ *   (minimum rooms), Huffman coding. */
 #ifndef GREEDY_H
 #define GREEDY_H
 
-#include <string>
-#include <utility>
-#include <vector>
-
 #include "model.h"
 
-// Sort by value/minute, take whole items while they fit. Theta(n log n). NOT always optimal.
-KnapsackResult greedyKnapsack01(const std::vector<Item>& items, int capacity);
+/* Sort by value/minute, take whole items while they fit. Theta(n log n). NOT always optimal. */
+KnapsackResult greedy_knapsack01(const Item *items, int n, int capacity);
 
-// Best value if items could be taken fractionally. Theta(n log n). Optimal for the fractional problem.
-double fractionalKnapsack(const std::vector<Item>& items, int capacity, long long& ops);
+/* Best value if items could be split. Theta(n log n). Optimal for the fractional problem. */
+double fractional_knapsack(const Item *items, int n, int capacity, long long *ops);
 
-// Maximum number of non-overlapping bookings in ONE room: sort by finish time, pick greedily.
-// Theta(n log n). Provably optimal (exchange argument).
-std::vector<Interval> activitySelection(std::vector<Interval> bookings, long long& ops);
+/* Maximum number of non-overlapping bookings in ONE room: sort by finish time, pick greedily.
+ * Theta(n log n). Optimal (exchange argument). out must have room for n; returns count chosen. */
+int activity_selection(const Interval *in, int n, Interval *out, long long *ops);
 
-// Baseline for comparison: accept bookings in order of START time if they do not overlap. Not optimal.
-std::vector<Interval> firstComeSelection(std::vector<Interval> bookings, long long& ops);
+/* Baseline: accept in order of START time if no overlap. Not optimal. */
+int first_come_selection(const Interval *in, int n, Interval *out, long long *ops);
 
-struct PartitionResult {
-    int rooms = 0;                                  // minimum rooms needed
-    std::vector<std::pair<int, int>> assignment;    // (booking id, room number)
-};
-// Minimum rooms so that every booking is served. Theta(n log n) with a min-heap of room finish times.
-PartitionResult intervalPartitioning(std::vector<Interval> bookings, long long& ops);
+/* Minimum rooms so every booking is served. Theta(n log n) using a min-heap of room free times.
+ * If room_of is not NULL (room for n ints) it receives the room of each input booking
+ * (-1 for invalid bookings). */
+int interval_partitioning(const Interval *in, int n, int *room_of, long long *ops);
 
-struct HuffmanResult {
-    std::vector<std::pair<unsigned char, std::string>> codes;   // symbol -> bit string
-    long long originalBits = 0;
-    long long encodedBits = 0;
-    int distinctSymbols = 0;
-    bool roundTripOk = false;    // decode(encode(text)) == text
-};
-// Optimal prefix code. Theta(n + k log k) for n characters and k distinct symbols.
-HuffmanResult huffmanCompress(const std::string& text);
+typedef struct {
+    char *codes[256];        /* bit string per symbol (NULL if symbol absent) */
+    long long original_bits;
+    long long encoded_bits;
+    int distinct_symbols;
+    int round_trip_ok;       /* decode(encode(text)) == text */
+} HuffmanResult;
+
+/* Optimal prefix code. Theta(N + k log k) for N characters and k distinct symbols. */
+HuffmanResult huffman_compress(const char *text, int n);
+void huffman_result_free(HuffmanResult *r);
 
 #endif

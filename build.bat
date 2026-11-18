@@ -1,6 +1,7 @@
 @echo off
 REM build.bat - builds without make. Usage: build.bat   (then: library.exe  /  run_tests.exe)
-set SRC=src\datagen.cpp src\divide_conquer.cpp src\string_match.cpp src\greedy.cpp src\dp.cpp src\backtrack.cpp src\graph.cpp src\library_engine.cpp src\io.cpp src\bench.cpp src\timer.cpp src\scenarios.cpp
-g++ -std=c++17 -O2 -Wall -Wextra -Iinclude %SRC% src\main.cpp -o library.exe || exit /b 1
-g++ -std=c++17 -O2 -Wall -Wextra -Iinclude %SRC% tests\test_main.cpp -o run_tests.exe || exit /b 1
+set FLAGS=-std=c11 -O2 -Wall -Wextra -pedantic -D__USE_MINGW_ANSI_STDIO=1 -fno-builtin-snprintf -Iinclude
+set SRC=src\vec.c src\rng.c src\heap.c src\model.c src\datagen.c src\divide_conquer.c src\string_match.c src\greedy.c src\dp.c src\backtrack.c src\graph.c src\library_engine.c src\io.c src\bench.c src\timer.c src\scenarios.c
+gcc %FLAGS% %SRC% src\main.c -o library.exe -lm || exit /b 1
+gcc %FLAGS% %SRC% tests\test_main.c -o run_tests.exe -lm || exit /b 1
 echo Build OK: library.exe and run_tests.exe

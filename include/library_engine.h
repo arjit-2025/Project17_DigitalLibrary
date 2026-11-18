@@ -1,59 +1,62 @@
-// library_engine.h - The search & recommendation engine that ties the algorithms to the domain.
-//   * inverted index (keyword -> sorted book ids) stored in a balanced BST (std::map)
-//   * keyword search  = index lookups + sorted-list intersection + merge-sort ranking
-//   * phrase search   = any of the four string matchers over abstracts
-//   * similar books   = LCS similarity of abstracts + keyword Jaccard
-//   * recommendations = interest overlap + citation proximity (multi-source Dijkstra) + rating
+/* library_engine.h - The search & recommendation engine that ties the algorithms to the domain.
+ *   * inverted index: sorted array of (term -> sorted book ids), BUILT with merge sort and
+ *     QUERIED with binary search
+ *   * keyword search  = index lookups + sorted-list intersection + merge-sort ranking
+ *   * phrase search   = any of the four string matchers over abstracts
+ *   * similar books   = LCS similarity of abstracts + keyword Jaccard
+ *   * recommendations = interest overlap + citation proximity (multi-source Dijkstra) + rating */
 #ifndef LIBRARY_ENGINE_H
 #define LIBRARY_ENGINE_H
-
-#include <map>
-#include <string>
-#include <vector>
 
 #include "model.h"
 #include "string_match.h"
 
-struct ScoredBook {
-    int bookId;
+typedef struct {
+    char word[MAX_WORD];
+    int *ids;     /* sorted ascending, no duplicates */
+    int count;
+} Posting;
+
+typedef struct {
+    const Library *lib;        /* not owned: rebuild the engine whenever the library changes */
+    Posting *terms;            /* sorted by word */
+    int num_terms;
+    char **lowered_abstracts;  /* lower-case copy of every abstract */
+} SearchEngine;
+
+typedef struct {
+    int book_id;
     double score;
-};
+} ScoredBook;
 
-struct Recommendation {
-    int bookId;
-    double score;            // 0.5*topic + 0.3*graph + 0.2*rating
-    double topicScore;       // fraction of the reader's interests covered by the book's keywords
-    double graphScore;       // 1 / (1 + distance/5) to the nearest book already read
-    double ratingScore;      // rating / 5
-    long long citationDistance;
-};
+typedef struct {
+    int book_id;
+    double score;                 /* 0.5*topic + 0.3*graph + 0.2*rating */
+    double topic_score;           /* fraction of the reader's interests covered by the book */
+    double graph_score;           /* 1 / (1 + distance/5) to the nearest book already read */
+    double rating_score;          /* rating / 5 */
+    long long citation_distance;
+} Recommendation;
 
-class SearchEngine {
-public:
-    // The engine keeps a reference: rebuild (or recreate) it whenever the library changes.
-    explicit SearchEngine(const Library& lib);
-    void rebuild();
+void engine_build(SearchEngine *e, const Library *lib);
+void engine_free(SearchEngine *e);
 
-    size_t indexedTerms() const { return index_.size(); }
+/* AND query over keywords / title words; results ranked by rating (desc). Returns count. */
+int engine_keyword_search(const SearchEngine *e, const char *query, IntVec *out, long long *ops);
 
-    // AND query over keywords / title words; results ranked by rating (desc).
-    std::vector<int> keywordSearch(const std::string& query, long long& ops) const;
+/* Book ids whose abstract contains the phrase (case-insensitive). Returns count. */
+int engine_phrase_search(const SearchEngine *e, const char *phrase, Matcher m, IntVec *out, MatchStats *st);
 
-    // Book ids whose abstract contains the phrase (case-insensitive).
-    std::vector<int> phraseSearch(const std::string& phrase, Matcher m, MatchStats& st) const;
+/* Top-k most similar books; out needs room for k. Returns count written. */
+int engine_similar_books(const SearchEngine *e, int book_id, int k, ScoredBook *out, long long *cells);
 
-    std::vector<ScoredBook> similarBooks(int bookId, int k, long long& cells) const;
-    std::vector<Recommendation> recommend(int userId, int k) const;
+/* Top-k recommendations for a reader; out needs room for k. Returns count written. */
+int engine_recommend(const SearchEngine *e, int user_id, int k, Recommendation *out);
 
-    // Top recommendations turned into knapsack items (weight = minutes, value = score*100).
-    std::vector<Item> readingCandidates(int userId, int maxItems) const;
+/* Top recommendations as knapsack items (weight = minutes, value = score*100). out needs max_items. */
+int engine_reading_candidates(const SearchEngine *e, int user_id, int max_items, Item *out);
 
-private:
-    const Library& lib_;
-    std::map<std::string, std::vector<int>> index_;
-    std::vector<std::string> loweredAbstracts_;
-};
-
-std::string toLowerCopy(const std::string& s);
+/* Lower-case copy (caller frees). */
+char *to_lower_copy(const char *s);
 
 #endif
